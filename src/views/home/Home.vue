@@ -6,7 +6,7 @@
       </template>
     </nav-bar>
 
-    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true" @pullingUp = "loadMore">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true">
       <home-swiper :banners="banners"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <feature-view></feature-view>
@@ -69,6 +69,16 @@ export default {
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
+
+
+    
+  },
+  mounted() {
+    //监听图片加载完成
+    this.$bus.$on('itemImageLoad', () => {
+      // console.log('-------------');
+      this.$refs.scroll.scroll.refresh()
+    })
   },
   methods: {
     //事件监听相关方法
@@ -92,10 +102,10 @@ export default {
       // console.log(position);
       this.Isshow = -position.y > 1000
     },
-    loadMore() {
-      // console.log("sda");
-      this.getHomeGoods(this.currentType)
-    },
+    // loadMore() {
+    //   // console.log("sda");
+    //   this.getHomeGoods(this.currentType)
+    // },
     //网络请求相关方法
     getHomeMultidate() {
       getHomeMultidate().then((res) => {
@@ -111,7 +121,7 @@ export default {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
 
-        this.$refs.scroll.scroll.finishPullUp()
+        // this.$refs.scroll.scroll.finishPullUp()
       });
     },
   },

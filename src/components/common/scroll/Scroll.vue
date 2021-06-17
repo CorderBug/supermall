@@ -16,12 +16,12 @@ export default {
         return 0
       }
     },
-    pullUpLoad: {
-      type: Boolean,
-      default() {
-        return false
-      }
-    }
+    // pullUpLoad: {
+    //   type: Boolean,
+    //   default() {
+    //     return false
+    //   }
+    // }
   },
   data() {
     return {
@@ -34,7 +34,7 @@ export default {
       observeDOM: true,
       click:true,
       probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad
+      // pullUpLoad: this.pullUpLoad
     })
     //监听滚动位置
     this.scroll.on('scroll', (position) => {
@@ -43,10 +43,10 @@ export default {
     })
 
     //监听上拉事件
-    this.scroll.on('pullingUp', () => {
-      // console.log("sd");
-      this.$emit('pullingUp')
-    })
+    // this.scroll.on('pullingUp', () => {
+    //   // console.log("sd");
+    //   this.$emit('pullingUp')
+    // })
   }
 }
 </script>
